@@ -82,7 +82,7 @@ set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You
    ![image](https://user-images.githubusercontent.com/39500675/135668021-b2f1414f-31bd-49ab-b05f-0f7d48bc99c8.png)
 
  - modify the deployment specification in Kubernetes Engine consloe:
-   Edit ``Workloads >> YAML```. At the right position and indentation level, carefully declare ```env```, ```volumeMounts``` and ```volumes```. 
+   Edit ```Workloads >> YAML```. At the right position and indentation level, carefully declare ```env```, ```volumeMounts``` and ```volumes```. 
  ```
 apiVersion: apps/v1
 kind: Deployment
