@@ -5,7 +5,7 @@ import json
 from google.cloud import bigquery
 
 app = Flask(__name__)
-client = bigquery.Client()
+client = bigquery.Client(project="kubernetes-docker-327413")
 
 @app.route('/')
 def root():
