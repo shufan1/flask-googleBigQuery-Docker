@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "kubernetes-docker-327413",
+  "private_key_id": "ef9601a05d9a9e818b94fbc8a0bfa0faf21025da",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDeyeaZsjP25zLx\n4Djxib2mTvq3DbL807KKGsE3Bc3WUJ7Obky+j+x/9BTKba8RmkT2r2oCF1+ttDum\nvPAAFLK5DDoj0qJ88bHGq+96Ax4PDzj+aBMKdJisQ27dEa+MwbIGmJDbO3SeCDmM\nrEy3jfsIwZolwrgjUQg2pnWfdp1RWS30m3dW3YeY+Gfr4zn8NeMYIrV0L+gATKg8\n1cK1ssXZloULJBJy6Ua7OxqNarnBQiH18dcomTX8+aqmvEdMTFfj7xhzG+KhAJ5S\nb9Lt6BhZyrJSDHhBFdwU9TvwZNt77lHAn9VkaDTpnOEgkrcjIAYfwsmLso0zJUhb\nxKA/LiC1AgMBAAECggEAJnu4thbWrBEOt0I0g+B3nnkpDKK0psCIqBtsAa2ieyEs\n9VqPLiGdSBLo3nio04ES5YuyY48XC2HFJg2f5Vut7ZIDnvl88NktDLTZZnmQYSiP\nfz6J/3XZg3QYe95YtRcmQcZryzrPb5bbHgYLMG+5i68pidlDRnJyWUJSsgtirFDJ\nMI3yb8EjU5tmxEmdDWXyf5RVvSmeUaU/4fwm2ktOlX8pi1NV1LsrjZ1XvQ543Z9t\niBXYBMFP9ARhdd6EWjO1Q8zaaTam3DixHwmtgyatxgUwG7cK0WoNOC+nlIp/OtP8\nuIhgi8cmK9dOEE/5HK3e7cj971IcwOJm0q345OazxwKBgQD438oHE2WgK1h3HuSL\nwnXteiVexchf81wWcbrHrKeGyb0Yden3yFkYAIL0lq3bHuB0oRTDxUTbWMBXswqC\nUkLquw7afgtSJRmWNgmP7dCd1Plt0G3rlietzdUCEhCABnYx9jYAoL0/5+5CY1oS\nc786UtvwMcOFxnZU3lY1+vfEYwKBgQDlKuij+hLOl7oBhPjzmsZISAyp4K2fm7MJ\nXr00ZYUGTjw+5zo8frzQ2lX5P0oeE0ZG4/d/ZpndQ04EJfoPlgxg1b6qwD+n8t9q\nFIjNoIhYkikV5sGfcCvYf4cUPvTrtIjKGzupxZuxoPxhQsFStNneP/CuWvYpeEIY\nPzbFpt/WBwKBgGZ+U4did6Hk+APm1xyvsz1f5nAHaCQL50re/5soAb5C6vtd5ENF\nYVu/Ki9stqDdMHcXt6OAZIEpJd14QMW29xQQgWd+LU9hNA5mpr19pUK66RZOllZF\neoXblPPLWLxA7QBac5cCm63r6HWy0O90d7afVTCwbeNz/lupTTvh5ZQdAoGAMjwL\nrxY8VSkRTw/0+oFtAZ85l2t248vfnSg1VW0DkfRIZImPTH+DqEyUGAT1nE4hU5zZ\nPgYhqEz+pw4kGJKNuBRirU9jJM+qhbhmnJyaBsBTXUeuHeMa2WRrGdcLHTf/3D3I\nAFke3fsqF6/obNbUA1IE0lOCLmj8JBCHUyBXZLUCgYEA8mLURRF3b4mvl1kdFekO\nX5S+LuIIXnniKbak4UXx1vhx9veDOlnULKwonygXCfDv0guM1YQ8ipig1pKkvh3p\nnKR5mNNa4VYO3Cl7y/e3gWhELbVWUhaGfGm5VXDBL+vgSyUWQth7cgJD8mrATZO+\nogjr/18HD3caM2a/Ll5cvWE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "kubernetesbigquery@kubernetes-docker-327413.iam.gserviceaccount.com",
+  "client_id": "101345598469068816835",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kubernetesbigquery%40kubernetes-docker-327413.iam.gserviceaccount.com"
+}

@@ -10,5 +10,5 @@ RUN pip install --upgrade google-cloud-bigquery
 RUN pip install --upgrade gcloud
 
 COPY . .
-
+ENV PORT 8080
 CMD [ "python", "app.py"]
