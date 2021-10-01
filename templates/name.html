@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2> We found the most popular names in NC from GoogleBigQuery</h2>
+<div>
+    {%for name in result%}
+    <p>{{ name }}</p>
+    {% endfor %}
+</div>
+{% endblock %}

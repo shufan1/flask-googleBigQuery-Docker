@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <div >
+    <h2> Average percentage of buildings suitable for installing solar panel by state: </h2>
+ </div>
+<br> 
+ <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>State</th>
+        <th>Average % suitable</th>
+        <th>Average % covered</th>
+        <th>Relative % of Room for Growth</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in table %}
+        <tr>
+          <td>{{ row.state_name}}</td>
+          <td>{{ row.avg_potential }}</td>
+          <td>{{ row.avg_actual }}</td>
+          <td>{{ row.room_for_growth }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable();
+    });
+  </script>
+{% endblock %}
