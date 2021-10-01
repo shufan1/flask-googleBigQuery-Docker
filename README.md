@@ -1,66 +1,71 @@
-v# flask-googleBigQuery-Docker-Kubernetes
+# flask-googleBigQuery-Docker-Kubernetes
+![image](https://user-images.githubusercontent.com/39500675/135641423-3d04a796-a443-43f5-b597-50f2e8086cef.png)
+
 ## components:
 1. source code for Flask application in Github
-2. XXX 
-3. docker conaitner image in DockerHub
-4. docker contianer image in Google Cloud Container Registry
-5. Kunternetes cluster in GCK
-docker, container image, running sql database on container flask api, mysql connector, 
+2. docker contianer image in Google Cloud Container Registry
+3. Kunternetes cluster in GCK
 
-```docker rm -f python-docker_mysqldb_1 python-docker_web_1; docker image rm python-docker_web;docker-compose up```
+**Part I: Make and test Flask API**
 
-If you ever get an error like "no module named "pkg_resources" 
-here are how you fix it:
-1. in Google Cloud shell 
- ```pip install --upgrade setuptools```
-2. Docker
-    if run docker contaner image, we will receive error like:
-       "
-    raise exceptions.from_http_response(response)
-google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects//jobs?prettyPrint=false: Invalid project ID ''. Project IDs must contain 6-63 lowercase letters, digits, or dashes. Some project IDs also include domain name separated by a colon. IDs must start with a letter and may not end with a dash.
-"
+Troubleshooting:
+If you get this following message when you run your python script calling BigQuery:<br>
+   _"""<br>
+   google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects//jobs?prettyPrint=false: Invalid project ID ''. Project IDs must contain 6-63 lowercase letters, digits, or dashes. Some project IDs also include domain name separated by a colon. IDs must start with a letter and may not end with a dash.<br>
+   """"_<br>
+set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You can find it under Project Info in GCP console:
+ ```gcloud config set project kubernetes-docker-327413```
+ 
+**Part II: Build Docker container image **
+- Build image: ``` docker build --tag flask-docker .```
+- check image: ```docker images```
+![image](https://user-images.githubusercontent.com/39500675/135636101-670439bc-d400-4d53-a503-58039271d5d6.png)
 
-build and push image in one step;
-          ```gcloud builds submit --tag gcr.io/kubernetes-docker-327413/python-docker```
+- Test running image as container:<br>
+  you might encounter "Invalid Project ID" error
+  add project ID to bigquery client in app.py and rebuild the image:<br>
+  ```client = bigquery.Client(project="kubernetes-docker-327413")```
 
-
-pull image in Google Cloud and upload to Google Cloud Contianer registry
+**Part III: Push image to GoogleCloud Contianer Registry and Run image in Cloud Run"**
 - Enabled Container Registry in your project:
   ```gcloud services enable containerregistry.googleapis.com```
-- Check if docker is installed: ```docker viersion```
-- Log in to docker hub:
-  ```docker login --username sxia1```
-- Pull image ```docker pull sxia1/python-docker:latest```
-- check image and find the imageID:
-  ```docker images```
-- add to Google container image registry of my project with projectID  _kubernetes-docker-327413_:
-
-    ```docker tag 190365834180 gcr.io/kubernetes-docker-327413/python-docker```<br>
+- Authenticate docker request to Container Registry:
+    ```gcloud auth configure-docker```
+- Tag and push:
+     ```docker tag ImageID gcr.io/kubernetes-docker-327413/python-docker```<br>
     ```docker push gcr.io/kubernetes-docker-327413/python-docker```
- - check Google Cloud contianer registry if this image is there
+- Run pushed image with Cloud Run:
+   Go into your cloud registry and see if the image is there. And connect to Cloud Run with a few clicks: <br>
+   specify region : us-east1
+ ![image](https://user-images.githubusercontent.com/39500675/135643367-fcf6a169-1af2-455f-809e-8aa4c26014ed.png)
+- After deployment configuration finised in Cloud Run, check our application with URL:
+   ![image](https://user-images.githubusercontent.com/39500675/135640740-4c8b19c3-74d7-455e-b602-c2852fece952.png)
 
-
-Google Cloud Kubernetes
+**Part IV Google Cloud Kubernetes**
  - enable Kubernetes API in GCP console 
+ - specify compute region and zone:<br>
+   ```gcloud config set compute/region us-east1
+      gcloud config set compute/zone us-east1-b
+   ```
  - create ckuster:<br>
     ```gcloud container clusters create docker-cloud-cluster```
  - get credentials and configures kubectl to use the cluster:<br>
     ```gcloud container clusters get-credentials docker-cloud-cluster```
- - Create the Deployment with container image:<br>
+ - Create deployment with container image:<br>
     depoyment name: give a kubernetes deployment name, **docker-server**<br>
     image: go into Google Cloud Contianer Registry and copy the container image name: <br>
-              _gcr.io/kubernetes-docker-327413/python-docker@sha256:f2f5f16c2604d5e7ba3726933bc05e6964682087deab9bdf705dc2e354e35ab0:<tagname>_<br>
+              _gcr.io/kubernetes-docker-327413/python-docker@sha256:3726913b526c0bad108881c85467c831162e0c6a7a9c462ae797abd25be0cab1_<br>
               the default <tagname> is _latest_<br>
     create command:<br>
     ```kubectl create deployment docker-server \
-          --image=gcr.io/kubernetes-docker-327413/python-docker@sha256:f2f5f16c2604d5e7ba3726933bc05e6964682087deab9bdf705dc2e354e35ab0```
+          --image=gcr.io/kubernetes-docker-327413/python-docker@sha256:3726913b526c0bad108881c85467c831162e0c6a7a9c462ae797abd25be0cab1```
   
 - Expose Kubernetes to the Internet:
   ```kubectl expose deployment docker-server --type LoadBalancer --port 80 --target-port 8080```
 - Inspect running deployment pods: ```kubectl get pods``` <br>
 - Inspect our server: ```kubectl get service docker-server```
-  ![image](https://user-images.githubusercontent.com/39500675/135134418-0b26b3f7-d9ce-4cc2-b790-81b5c6b322ce.png)
+  ![image](https://user-images.githubusercontent.com/39500675/135646542-c8149269-b4ed-450a-bed3-15f2133ef180.png)
 - View our application:  ```http://EXTERNAL_IP```
 
- 
 
+ **Side note: Enable BigQuery for Kubernetes**
