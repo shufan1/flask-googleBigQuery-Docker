@@ -1,4 +1,4 @@
-# flask-googleBigQuery-Docker-Kubernetes
+v# flask-googleBigQuery-Docker-Kubernetes
 ## components:
 1. source code for Flask application in Github
 2. XXX 
@@ -9,14 +9,20 @@ docker, container image, running sql database on container flask api, mysql conn
 
 ```docker rm -f python-docker_mysqldb_1 python-docker_web_1; docker image rm python-docker_web;docker-compose up```
 
-Push to docker hub in AWS Cloud9
-- log in: ```docker login --username sxia1```
-- tag local image and specify my dockerhub repo: <br>
-    check image: ```docker images```  <br>
-    should have:  <br>
-    python-docker_web   latest  ##imageID <br>
-    tag image with your DockerHub username + tagname:
-    ```docker tag ##imageID sxia1/python-docker:tagname```
+If you ever get an error like "no module named "pkg_resources" 
+here are how you fix it:
+1. in Google Cloud shell 
+ ```pip install --upgrade setuptools```
+2. Docker
+    if run docker contaner image, we will receive error like:
+       "
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects//jobs?prettyPrint=false: Invalid project ID ''. Project IDs must contain 6-63 lowercase letters, digits, or dashes. Some project IDs also include domain name separated by a colon. IDs must start with a letter and may not end with a dash.
+"
+
+build and push image in one step;
+          ```gcloud builds submit --tag gcr.io/kubernetes-docker-327413/python-docker```
+
 
 pull image in Google Cloud and upload to Google Cloud Contianer registry
 - Enabled Container Registry in your project:
