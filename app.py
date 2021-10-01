@@ -1,7 +1,5 @@
 from flask import Flask
 from flask import render_template
-#import mysql.connector
-import json
 from google.cloud import bigquery
 
 app = Flask(__name__)
