@@ -1,7 +1,7 @@
 # flask-googleBigQuery-Docker-Kubernetes
 ## components:
 1. source code for Flask application in Github
-2. bulding the application, creating the container iamge image and running container image in AWS 
+2. XXX 
 3. docker conaitner image in DockerHub
 4. docker contianer image in Google Cloud Container Registry
 5. Kunternetes cluster in GCK
