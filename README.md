@@ -39,8 +39,7 @@ set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You
    specify region : us-east1
  ![image](https://user-images.githubusercontent.com/39500675/135643367-fcf6a169-1af2-455f-809e-8aa4c26014ed.png)
 - After deployment configuration finised in Cloud Run, check our application with URL:
-   ![image](https://user-images.githubusercontent.com/39500675/135640740-4c8b19c3-74d7-455e-b602-c2852fece952.png)
-
+- 
 **Part IV Google Cloud Kubernetes**
  - enable Kubernetes API in GCP console 
  - specify compute region and zone:<br>
