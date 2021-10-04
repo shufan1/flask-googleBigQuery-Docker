@@ -6,6 +6,9 @@ install:
 format:
 	black *.py
 
+test:
+	pytest test.py
+
 lint:
 	pylint --disable=R,C app.py
 

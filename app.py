@@ -8,29 +8,12 @@ app = Flask(__name__)
 client = bigquery.Client(project="kubernetes-docker-327413")
 
 @app.route('/')
-def root():
+def home():
     message = "Welcome, you are at the home page"
     return render_template('page.html', welcome=message)
     
-    
-@app.route('/popularNameTop10')
-def popularNameTop10():
-    #Perform a query
-    QUERY = (
-        'SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013` '
-        'WHERE state = "NC" '
-        'LIMIT 10')
-    query_job = client.query(QUERY)  # API request
-    rows = query_job.result()  # Waits for query to finish
-    names = [] 
-    for row in rows:
-        print(row.name)
-        names.append(row.name)
 
-    return render_template('name.html', result = names)
-
-
-# define row
+# define row in the Flask API table
 class Item(object):
     def __init__(self, state_name, avg_potential,avg_actual):
         self.state_name = state_name
@@ -63,21 +46,7 @@ def solarpotential():
         print(item)
         table.append(item)
     print(states)
-    
-    
-    # table_dict = {"state":states,
-    #                 "avg_potential":avg_potential,
-    #                 "avg_actual":avg_actual}
-    # df =  pd.DataFrame(table_dict)
-    # print(df)
-    return render_template('solarPotentialState.html',table=table)
-
-    #     print(row.name)
-    #     names.append(row.name)
-
-            # "avg percentage potential": avg_percent,
-            # "avg percentage covered": avg_actual}#render_template('name.html', result = names)
-
+    return render_template('solarpotential.html',table=table)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8080)
