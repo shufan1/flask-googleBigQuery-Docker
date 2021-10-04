@@ -39,8 +39,7 @@ set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You
    specify region : us-east1
  ![image](https://user-images.githubusercontent.com/39500675/135643367-fcf6a169-1af2-455f-809e-8aa4c26014ed.png)
 - After deployment configuration finised in Cloud Run, check our application with URL:
-   ![image](https://user-images.githubusercontent.com/39500675/135640740-4c8b19c3-74d7-455e-b602-c2852fece952.png)
-
+- 
 **Part IV Google Cloud Kubernetes**
  - enable Kubernetes API in GCP console 
  - specify compute region and zone:<br>
@@ -55,17 +54,69 @@ set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You
     depoyment name: give a kubernetes deployment name, **docker-server**<br>
     image: go into Google Cloud Contianer Registry and copy the container image name: <br>
               _gcr.io/kubernetes-docker-327413/python-docker@sha256:3726913b526c0bad108881c85467c831162e0c6a7a9c462ae797abd25be0cab1_<br>
-              the default <tagname> is _latest_<br>
     create command:<br>
-    ```kubectl create deployment docker-server \
-          --image=gcr.io/kubernetes-docker-327413/python-docker@sha256:3726913b526c0bad108881c85467c831162e0c6a7a9c462ae797abd25be0cab1```
+    ```
+   kubectl create deployment docker-server \
+          --image=gcr.io/kubernetes-docker-327413/python-docker@sha256:3726913b526c0bad108881c85467c831162e0c6a7a9c462ae797abd25be0cab1
+   ```
   
 - Expose Kubernetes to the Internet:
   ```kubectl expose deployment docker-server --type LoadBalancer --port 80 --target-port 8080```
 - Inspect running deployment pods: ```kubectl get pods``` <br>
 - Inspect our server: ```kubectl get service docker-server```
   ![image](https://user-images.githubusercontent.com/39500675/135646542-c8149269-b4ed-450a-bed3-15f2133ef180.png)
-- View our application:  ```http://EXTERNAL_IP```
+- View our application by curl or in the browser:  ```http://EXTERNAL_IP```
+- At this point, you can see the main page but the application does not have access to BigQuery. Therefore any page with query task returns error. In the next section, I talk about how to fix this issue.
 
 
  **Side note: Enable BigQuery for Kubernetes**
+
+ - create:<br>
+   Follow the steps outlined here: https://cloud.google.com/kubernetes-engine/docs/tutorials/authenticating-to-cloud-platform#step_3_create_service_account_credentials<br>
+   Instead of pub-sub: I named the key as kubernetesbigquery-key and specified Role as BigQueryAdmin. Dowload the key as a JSON file following the documentation.
+ - upload the key JSON file to your project directory
+ - create secret key in Kubernetes: 
+       ```kubectl create secret generic kubernetesbigquery-key --from-file=key.json=kubernetes-docker-327413-ef9601a05d9a.json```<br>
+   should be able to see the key in Kubernetes Engine >> Configuration
+   ![image](https://user-images.githubusercontent.com/39500675/135668021-b2f1414f-31bd-49ab-b05f-0f7d48bc99c8.png)
+
+ - modify the deployment specification in Kubernetes Engine consloe:
+   Edit ```Workloads >> YAML```. At the right position and indentation level, carefully declare ```env```, ```volumeMounts``` and ```volumes```. 
+ ```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    ...
+spec:
+  ...
+  template:
+    ...
+    spec:
+      containers:
+      - env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+        image: gcr.io/kubernetes-docker-327413/python-docker@sha256:3726913b526c0bad108881c85467c831162e0c6a7a9c462ae797abd25be0cab1
+        imagePullPolicy: IfNotPresent
+        name: python-docker
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/secrets/google
+          name: google-cloud-key
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: google-cloud-key
+        secret:
+          defaultMode: 420
+          secretName: kubernetesbigquery-key
+status:
+  ...
+````
+- Save the edited YML file and it will automatically deploy
+- Now we can view the application in browser !!!!
