@@ -5,6 +5,7 @@
 1. source code for Flask application in Github
 2. docker contianer image in Google Cloud Container Registry
 3. Kunternetes cluster in GCK
+![alt text](https://github.com/shufan1/flask-googleBigQuery-Docker/blob/main/blueprint.jpg?raw=true)
 
 **Part I: Make and test Flask API locally**
 - git clone this repo
