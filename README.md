@@ -1,6 +1,7 @@
 # flask-googleBigQuery-Docker-Kubernetes
-![image](https://user-images.githubusercontent.com/39500675/135641423-3d04a796-a443-43f5-b597-50f2e8086cef.png)
+![alt text](https://github.com/shufan1/flask-googleBigQuery-Docker/blob/main/showapplication.gif)
 
+- Inspired by: https://colab.research.google.com/drive/1_BBcQWcgYXFyuThrEV_YwGzvn_UNcRNx#scrollTo=6GPlo51Z0LPU
 ## components:
 1. source code for Flask application in Github
 2. docker contianer image in Google Cloud Container Registry
