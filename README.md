@@ -42,7 +42,7 @@ set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You
 - Authenticate docker request to Container Registry:
     ```gcloud auth configure-docker```
 - Tag and push:
-     ```docker tag ImageID gcr.io/kubernetes-docker-327413/python-docker```<br>
+     ```docker tag <ImageID> gcr.io/kubernetes-docker-327413/python-docker```<br>
     ```docker push gcr.io/kubernetes-docker-327413/python-docker```
 - Run pushed image with Cloud Run:
    Go into your cloud registry and see if the image is there. And connect to Cloud Run with a few clicks: <br>
