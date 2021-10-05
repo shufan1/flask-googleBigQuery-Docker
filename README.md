@@ -6,17 +6,25 @@
 2. docker contianer image in Google Cloud Container Registry
 3. Kunternetes cluster in GCK
 
-**Part I: Make and test Flask API**
+**Part I: Make and test Flask API locally**
+- git clone this repo
+- `make install`
+- test if connecting to Google Big Query works: `pytest test.py  `
+- Run Flask API locally: `python3 app.py`
+- (If in Google Cloud Platform, can be deployed with Cloud Build and set up CD)
 
 Troubleshooting:
 If you get this following message when you run your python script calling BigQuery:<br>
    _"""<br>
    google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects//jobs?prettyPrint=false: Invalid project ID ''. Project IDs must contain 6-63 lowercase letters, digits, or dashes. Some project IDs also include domain name separated by a colon. IDs must start with a letter and may not end with a dash.<br>
    """"_<br>
-set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You can find it under Project Info in GCP console:
+set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You can find it under Project Info in GCP console and do this: <br>
  ```gcloud config set project kubernetes-docker-327413```
- 
-**Part II: Build Docker container image **
+<hr>
+
+**_If you want to make a Docker container and Kubernetes, continue_**
+
+**Part II: Build Docker container image**
 - Build image: ``` docker build --tag flask-docker .```
 - check image: ```docker images```
 ![image](https://user-images.githubusercontent.com/39500675/135636101-670439bc-d400-4d53-a503-58039271d5d6.png)
@@ -38,13 +46,14 @@ set ProjectID in your cloudshell. My project ID is kubernetes-docker-327413. You
    Go into your cloud registry and see if the image is there. And connect to Cloud Run with a few clicks: <br>
    specify region : us-east1
  ![image](https://user-images.githubusercontent.com/39500675/135643367-fcf6a169-1af2-455f-809e-8aa4c26014ed.png)
-- After deployment configuration finised in Cloud Run, check our application with URL:
-- 
+- After deployment configuration finised in Cloud Run, check our application with the URL given.
+
 **Part IV Google Cloud Kubernetes**
  - enable Kubernetes API in GCP console 
  - specify compute region and zone:<br>
-   ```gcloud config set compute/region us-east1
-      gcloud config set compute/zone us-east1-b
+   ```
+   gcloud config set compute/region us-east1
+   gcloud config set compute/zone us-east1-b
    ```
  - create ckuster:<br>
     ```gcloud container clusters create docker-cloud-cluster```
