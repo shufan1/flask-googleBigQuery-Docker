@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import render_template,request,url_for,redirect
 from google.cloud import bigquery
-import pandas as pd
 import plotly
 import plotly.graph_objects as go
 import json
