@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <div style="margin-top: 7%">
+    <h3> {{state}} </h3>
+ </div>
+ <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>zipcode</th>
+        <th># buildings have solar installed</th>
+        <th>median kw generated/building</th>
+        <th>kw potential for all roof types</th>
+        <th>% kw from rooftop utilized</th>
+        <th># panels median</th>
+        <th># panels total </th>
+        <th>% number of panels utilized</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in table %}
+        <tr>
+          <td>{{ row.zipcode}}</td>
+          <td>{{ row.existing_installs_count }}</td>
+          <td>{{ row.kw_median }}</td>
+          <td>{{ row.kw_total }}</td>
+          <td>{{ row.percent_rooftopKW_utilized }}</td>
+          <td>{{ row.number_of_panels_median }}</td>
+          <td>{{ row.number_of_panels_total }}</td>
+          <td>{{ row.percent_panels_used}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable();
+    });
+  </script>
+{% endblock %}
