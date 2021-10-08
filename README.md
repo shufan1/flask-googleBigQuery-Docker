@@ -1,3 +1,4 @@
+![example workflow](https://github.com/shufan1/flask-googleBigQuery-Docker/actions/workflows/main.yml/badge.svg)
 # flask-googleBigQuery-Docker-Kubernetes
 ![alt text](https://github.com/shufan1/flask-googleBigQuery-Docker/blob/main/showapplication.gif)
 
