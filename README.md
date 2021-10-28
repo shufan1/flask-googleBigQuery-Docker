@@ -1,5 +1,9 @@
 ![example workflow](https://github.com/shufan1/flask-googleBigQuery-Docker/actions/workflows/main.yml/badge.svg)
 # flask-googleBigQuery-Docker-Kubernetes
+
+## how to pull and run
+- pull from Dockerhub (I have a copy in my GCP container registory)
+- run
 ![alt text](https://github.com/shufan1/flask-googleBigQuery-Docker/blob/main/showapplication.gif)
 
 - Inspired by: https://colab.research.google.com/drive/1_BBcQWcgYXFyuThrEV_YwGzvn_UNcRNx#scrollTo=6GPlo51Z0LPU
